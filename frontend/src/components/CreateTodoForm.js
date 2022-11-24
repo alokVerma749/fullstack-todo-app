@@ -1,18 +1,22 @@
-import React, { useState } from 'react'
 import axios from "axios"
-
-const CreateTodoForm = () => {
-    const [todo, settodo] = useState("")
+/**
+ * NOTES FOR MYSELF
+ * whenever a todo is created 'todo' state is changed
+ * whenever a 'todo' state changes 'allTodos' component need a reload
+ * So make [todo,settodo] states global so that 'todo' state can be send to 'AllTodos' component via props
+ * put 'todo' in dependency array of 'AllTodos' component
+ */
+const CreateTodoForm = ({ todo, settodo }) => {
     const submitData = async () => {
         try {
             const data = {
                 title: todo
             }
-            const res = await axios.post('/todo/create', data)
+            const res = await axios.post('/todo/createtodo', data)
             console.log(res)
         } catch (error) {
-            console.log('failed to upload')
-            console.log(error)
+            console.log('failed to upload todo')
+            console.log(error.message)
         }
 
     }
