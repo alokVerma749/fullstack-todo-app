@@ -7,7 +7,7 @@ import axios from "axios"
  * render whole list of fetched data('todos' state )
  */
 
-const AllTodos = ({ todo }) => {
+const AllTodos = ({ todo, tasks, settasks }) => {
     const [todos, settodos] = useState(null)
     const fetchUserData = async () => {
         const resp = await axios.get('/todo/getalltodos')
@@ -55,6 +55,18 @@ const AllTodos = ({ todo }) => {
         }
     }
 
+    const handleShowTasks = async (e) => {
+        const todoid = e.currentTarget.getAttribute("todoid")
+        const resp = await axios.get(`/todo/task/getalltasks${todoid}`)
+        if (!resp) {
+            throw new Error("Todos fetching failed")
+        }
+        if (resp.data.tasks.length > 0) {
+            settasks(resp.data)
+        }
+        console.log(resp.data)
+    }
+
     const handleCreateTask = async (e) => {
         const todoid = e.currentTarget.getAttribute("todoid")
         const task = prompt("Enter Task")
@@ -73,7 +85,7 @@ const AllTodos = ({ todo }) => {
         <div className='aside w-[30vw] border-2 border-cyan-200 tracking-wider'>
             <h3 className="text-center text-3xl font-semibold text-cyan-600">TODOS</h3>
             {todos && todos.map((todo) => (
-                <div key={todo._id} className=" border-0 shadow-gray-400 shadow-xl hover:shadow-cyan-500/50 outline-0 my-2 p-2">
+                <div key={todo._id} todoid={todo._id} onClick={handleShowTasks} className=" border-0 shadow-gray-400 shadow-xl hover:shadow-cyan-500/50 outline-0 my-2 p-2 cursor-pointer">
                     <p className="text-center text-xl font-semibold text-cyan-500/50 my-3">{todo.title}</p>
                     <div className="buttons flex justify-evenly flex-row items-center">
                         <button onClick={handleEdit} todoid={todo._id} className="bg-cyan-500 shadow-xl hover:shadow-cyan-500/50 text-white p-2 outline-0">Edit</button>

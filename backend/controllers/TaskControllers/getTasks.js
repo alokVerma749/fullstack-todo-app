@@ -12,7 +12,8 @@ const getTasks = async (req, res) => {
         }
         res.status(200).json({
             success: true,
-            tasks: todo.tasks
+            tasks: todo.tasks,
+            todoTitle: todo.title
         })
     } catch (error) {
         throw new Error("getTasks error \n " + error.message)

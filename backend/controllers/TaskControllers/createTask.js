@@ -9,7 +9,6 @@ const createTask = async (req, res) => {
             return res.status(400).send('No todo exists')
         }
         const task = req.body.text
-        console.log(req.body.text)
         // if TASK is empty
         if (task === "") {
             return res.status(501).send('please enter a task')
