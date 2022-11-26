@@ -5,13 +5,14 @@ const getTasks = async (req, res) => {
         const todoId = req.params.todoId;
         const todo = await Todo.findById(todoId)
         if (!todo) {
-            res.status(400).json({
+            return res.status(400).json({
                 success: false,
                 message: "can't find todo"
             })
         }
         res.status(200).json({
             success: true,
+            todoid: todo._id,
             tasks: todo.tasks,
             todoTitle: todo.title
         })

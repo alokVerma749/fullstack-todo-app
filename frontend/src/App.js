@@ -13,7 +13,7 @@ function App() {
     <>
       <CreateTodoForm todo={todo} settodo={settodo} />
       <div className="main flex flex-row justify-evenly">
-        <AllTodos todo={todo} tasks={tasks} settasks={settasks} />
+        <AllTodos todo={todo} settasks={settasks} />
         <AllTasks tasks={tasks} settasks={settasks} />
       </div>
     </>

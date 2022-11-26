@@ -1,8 +1,23 @@
 import React from 'react'
+import axios from 'axios'
 
-const AllTasks = ({ tasks }) => {
+const AllTasks = ({ tasks, settasks }) => {
     const allTasks = tasks.tasks
     const title = tasks.todoTitle
+    const handleDelete = async (e) => {
+        const task = e.currentTarget.getAttribute("task")
+        const todoid = tasks.todoid;
+        const res = await axios.delete(`/todo/task/deletetask${todoid}/${task}`)
+        console.log(res)
+        const resp = await axios.get(`/todo/task/getalltasks${todoid}`)
+        if (!resp) {
+            throw new Error("Todos fetching failed")
+        }
+        if (resp.data.tasks.length >= 0) {
+            settasks(resp.data)
+        }
+        console.log(resp.data)
+    }
     return (
         <div className='w-[69vw] border-2 border-cyan-200 tracking-wider float-right'>
             <h3 className="text-center text-3xl font-semibold text-cyan-600 my-2">{title}</h3>
@@ -11,10 +26,7 @@ const AllTasks = ({ tasks }) => {
                     <p className="text-center text-xl font-semibold text-cyan-500/50 my-2">{task}</p>
                     <div className="buttons flex justify-evenly flex-row items-center p-2">
                         <div className="buttons flex justify-evenly flex-row items-center">
-                            <button className="bg-cyan-500 shadow-xl hover:shadow-cyan-500/50 text-white p-2 outline-0">Edit</button>
-                        </div>
-                        <div className="buttons flex justify-evenly flex-row items-center">
-                            <button className="bg-red-600 shadow-xl hover:shadow-red-600/500 text-white p-2 outline-0">Delete</button>
+                            <button onClick={handleDelete} task={task} className="bg-red-600 shadow-xl hover:shadow-red-600/500 text-white p-2 outline-0">Delete</button>
                         </div>
                     </div>
                 </div>

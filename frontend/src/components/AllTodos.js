@@ -7,7 +7,7 @@ import axios from "axios"
  * render whole list of fetched data('todos' state )
  */
 
-const AllTodos = ({ todo, tasks, settasks }) => {
+const AllTodos = ({ todo, settasks }) => {
     const [todos, settodos] = useState(null)
     const fetchUserData = async () => {
         const resp = await axios.get('/todo/getalltodos')
@@ -34,6 +34,7 @@ const AllTodos = ({ todo, tasks, settasks }) => {
          * and set new todos array as todos
          */
         const todoid = e.currentTarget.getAttribute("todoid")
+        // this line delete the todo from database
         const resp = await axios.delete(`/todo/deletetodo${todoid}`)
         console.log(resp)
         // removing deleted todo from list
@@ -61,7 +62,7 @@ const AllTodos = ({ todo, tasks, settasks }) => {
         if (!resp) {
             throw new Error("Todos fetching failed")
         }
-        if (resp.data.tasks.length > 0) {
+        if (resp.data.tasks.length >= 0) {
             settasks(resp.data)
         }
         console.log(resp.data)

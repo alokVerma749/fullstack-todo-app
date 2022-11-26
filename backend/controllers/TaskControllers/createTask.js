@@ -10,7 +10,7 @@ const createTask = async (req, res) => {
         }
         const task = req.body.text
         // if TASK is empty
-        if (task === "") {
+        if (task === "" || task === null) {
             return res.status(501).send('please enter a task')
         }
         todo.tasks.push(task)
