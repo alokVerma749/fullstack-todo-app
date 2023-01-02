@@ -4,7 +4,6 @@ const getTodo = async (req, res) => {
     try {
         const todoId = req.params.todoId
         const todo = await Todo.findById(todoId)
-        console.log(todo)
         if (todo) {
             res.status(200).json({
                 success: true,

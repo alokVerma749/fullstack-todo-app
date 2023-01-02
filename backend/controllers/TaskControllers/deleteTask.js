@@ -5,20 +5,17 @@ const deleteTask = async (req, res) => {
         const { todoId, taskString } = req.params
         const todo = await Todo.findById(todoId)
         if (!todo) {
-            console.log('todo in not present')
             return res.status(400).json({
                 sucess: false,
                 message: "task not found"
             })
         }
         if (!taskString) {
-            console.log('task in not present')
             return res.status(400).json({
                 sucess: false,
                 message: "task not found"
             })
         }
-        console.log(taskString + " is deleted")
         todo.tasks.pull(taskString)
         todo.save()
         res.status(200).json({

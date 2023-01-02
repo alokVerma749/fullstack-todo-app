@@ -1,6 +1,0 @@
-exports.signup = () => {
-
-}
-exports.login = () => {
-
-}

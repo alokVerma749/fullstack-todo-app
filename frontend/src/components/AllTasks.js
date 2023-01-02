@@ -7,8 +7,7 @@ const AllTasks = ({ tasks, settasks }) => {
     const handleDelete = async (e) => {
         const task = e.currentTarget.getAttribute("task")
         const todoid = tasks.todoid;
-        const res = await axios.delete(`/todo/task/deletetask${todoid}/${task}`)
-        console.log(res)
+        await axios.delete(`/todo/task/deletetask${todoid}/${task}`)
         const resp = await axios.get(`/todo/task/getalltasks${todoid}`)
         if (!resp) {
             throw new Error("Todos fetching failed")
@@ -16,10 +15,9 @@ const AllTasks = ({ tasks, settasks }) => {
         if (resp.data.tasks.length >= 0) {
             settasks(resp.data)
         }
-        console.log(resp.data)
     }
     return (
-        <div className='w-[69vw] border-2 border-cyan-200 tracking-wider float-right'>
+        <div className='w-[69vw] tracking-wider float-right'>
             <h3 className="text-center text-3xl font-semibold text-cyan-600 my-2">{title}</h3>
             {tasks && allTasks.map((task) => (
                 <div key={task} className=" border-0 shadow-gray-400 shadow-xl hover:shadow-cyan-500/50 outline-0 my-2 p-2 w-[50%] h-[110px] mx-auto">
