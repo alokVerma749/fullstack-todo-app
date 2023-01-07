@@ -1,6 +1,19 @@
 # fullstack-todo-app
 Todo app build using MERN stack
 
+<div align="center">
+  <a href="https://github.com/alokVerma749/uiproject_14">
+    <img src="https://learncodeonline.in/mascot.png" alt="Logo" width="80">
+  </a>
+
+<h3 align="center">TODO_APP</h3>
+
+  <p align="center">
+    <br />
+    <a href="https://alokverma-uiproject-14.netlify.app/">Live Link</a>
+  </p>
+</div>
+
 ## 🛠 Technologies Used
   - Mongodb - database
   - NODE.js - Java Script Runtime Engine
