@@ -9,7 +9,7 @@ const AllTodos = ({ todo, settasks }) => {
         if (!resp) {
             throw new Error("Todos fetching failed")
         }
-        if (resp.data.allTodos.length > 0) {
+        if (resp.data.success) {
             settodos(resp.data.allTodos)
         }
     }
